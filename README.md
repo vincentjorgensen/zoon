@@ -27,5 +27,5 @@ default\_environment: dev
 environments:
 \- dev: : Dev
   username: spongebobsquarepants
-  aws\_access\_key\_id: 'AKIAI6HSG7RSNSBX44TQ'
-  aws\_secret\_access\_key: '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'
+  aws\_access\_key\_id: 'AKIA...'
+  aws\_secret\_access\_key: '...'
