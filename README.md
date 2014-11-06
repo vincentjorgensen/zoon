@@ -2,6 +2,10 @@ zoon
 ====
 Lightweight Application Launch Utility for AWS
 ----------------------------------------------
+Python utility for automating many AWS tasks, like CloudFront.
+
+Requires: pyyaml, boto
+
 Written by: [Vincent Jørgensen](mailto:vincent_dot_jorgensen_at_gmail_dot_com), 2014
 Freely distributable via the [MIT License](http://choosealicense.com/licenses/mit/).
 
