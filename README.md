@@ -17,7 +17,7 @@ Currently, the AWS Security Group must already exist.
 - --region=region Defaults to us-east-1
 - --az=AZ Defaults to us-east-1c, multiple allowed, instantiates in round-robin fashion
 - --sg=sg No default, optional
-- --vpc Defaults to false
+- --no-vpc Use EC2 classic instead of VPC
 
 .zoonrc
 -------
