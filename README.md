@@ -2,30 +2,31 @@ zoon
 ====
 Lightweight Application Launch Utility for AWS
 ----------------------------------------------
+Written by: [Vincent Jørgensen](mailto:vincent_dot_jorgensen_at_gmail_dot_com), 2014
+Freely distributable via the [MIT License](http://choosealicense.com/licenses/mit/).
+
+On the name 'zoon', and it's pronunciation
+---------
+"zoon" is an English transliteration of the Greek "ζῷον", meaning "animal, living thing." In Ancient Greek, in would have been approximately pronounced like &lt;sdoooe-on&gt;. One may refer to this project as "zoon, rhymes with zoom", "zoon, like 'so on' but with a 'z' sound instead of an 's'", or anything closely approximating the Greek.
 
 Usage:
 ------
-(Note, this is proposed usage)
-zoon.py <engine> [engine\_args] <action> [action\_args]
+zoon.py [-h] [optional args] &lt;engine&gt; [engine\_args] 
 e.g.
-zoon.py consul create LTarquiniusCollatinus --aws --size=5 --region=us-east-1 --az=us-east-1c --az=us-east-1d --az-us-east-1c --sg=praetor
+**zoon.py** *consul* create LTarquiniusCollatinus --aws --size=5 --region=us-east-1 --az=us-east-1c --az=us-east-1d --az-us-east-1c --sg=praetor
 
-Currently, the AWS Security Group must already exist.
-
-
-- --aws Defaults to True
-- --region=region Defaults to us-east-1
-- --az=AZ Defaults to us-east-1c, multiple allowed, instantiates in round-robin fashion
-- --sg=sg No default, optional
-- --no-vpc Use EC2 classic instead of VPC
 
 .zoonrc
--------
-Sits in Home Directory, for example: $HOME/.zoonrc
-
-default\_environment: dev
+--------
+Located in `$HOME/.zoonrc`
+```
+default_environment: dev
 environments:
-\- dev: : Dev
-  username: spongebobsquarepants
-  aws\_access\_key\_id: 'AKIA...'
-  aws\_secret\_access\_key: '...'
+  - dev: Dev
+    username: spongebobsquarepants
+    aws_access_key_id: 'AKIA...'
+    aws_secret_access_key: '...'
+```
+
+
+> Written with [StackEdit](https://stackedit.io/).
