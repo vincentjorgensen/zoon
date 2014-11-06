@@ -26,7 +26,8 @@ Located in `$HOME/.zoonrc`
 ```
 default_environment: dev
 environments:
-  - dev: Dev
+  dev:
+    description: Development
     username: spongebobsquarepants
     aws_access_key_id: 'AKIA...'
     aws_secret_access_key: '...'
