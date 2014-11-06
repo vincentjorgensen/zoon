@@ -11,7 +11,6 @@ import ze_consul
 
 def f_consul(args):
     cosul = ze_consul.Consul(args)
-    print 'Ave Consul ' + args.name + '!'
 
 def command_line():
     # Common "parent" parsers
@@ -33,8 +32,8 @@ def command_line():
 
     vpc = argparse.ArgumentParser(add_help=False)
     vpc_group = vpc.add_mutually_exclusive_group()
-    vpc_group.add_argument("--no-vpc", help="use EC2 Classic", action="store_true", default=False)
     vpc_group.add_argument("--vpc", help="use EC2 VPC", action="store_true", default=True)
+    vpc_group.add_argument("--no-vpc", help="use EC2 Classic", action="store_true", default=False)
 
     # Top Level Parser
     parser = argparse.ArgumentParser(description='AWS lightweight application management')
@@ -52,6 +51,9 @@ def command_line():
 
     args = parser.parse_args()
 
+    if args.no_vpc:
+        args.vpc = False
+
     return args
 
 if __name__ == '__main__':
@@ -59,6 +61,6 @@ if __name__ == '__main__':
     args = command_line()
     args.func(args)
 
-#    print args
+    print args
     
 # END
