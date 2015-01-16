@@ -78,6 +78,7 @@ def CloudFormation:
        for tup in parameters:
         template['Parameters'][tup[0]] = {"Type": tup[1]}
 
+        # Mappings
         mappings = {
           "RegionToAmi" = {},
           "AwsAccountMap": {
@@ -87,12 +88,84 @@ def CloudFormation:
           }
         }
 
-       # Supported regions format:
-       # 
-       supportedregions = metroon.get(self.env + '-supportedregions')
+        # Supported regions format:
+        # 
+        supportedregions = metroon.get(self.env + '-supportedregions')
 
-       for reg in supportedregions:
-           mappings['RegionToAmi'][reg] = metroon.get(self.env + '-' + reg + '-hvm')
+        for reg in supportedregions:
+           mappings['RegionToAmi'][reg] = { "hvm": metroon.get(self.env + '-' + reg + '-hvm-' + self.app_type) }
+        template['Mappings']['RegionToAmi'] = mappings
+
+        # Resources
+        resources = {
+          "S3AccessRole": _s3accessrole,
+          "S3AccessProfile": _s3accessprofile,
+        }
+
+
+
+    _s3accessrole = {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": [
+                  "ec2.amazonaws.com"
+                ]
+              },
+              "Action": [
+                "sts:AssumeRole"
+              ]
+            }
+          ]
+        },
+        "Path": "/",
+        "Policies": [
+          {
+            "PolicyName": "S3AccessPolicy",
+            "PolicyDocument": {
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:List*"
+                  ],
+                  "Resource": [
+                    "arn:aws:s3:::spongecell-devops"
+                  ]
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:Get*",
+                    "s3:List*"
+                  ],
+                  "Resource": [
+                    "arn:aws:s3:::spongecell-devops/agrippa/*"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+
+    _s3accessprolfile = {
+      "Type": "AWS::IAM::InstanceProfile",
+      "Properties": {
+        "Path": "/",
+        "Roles": [
+          {
+            "Ref": "S3AccessRole"
+          }
+        ]
+      }
+    }
 
 
 
